@@ -20,5 +20,21 @@ model User {
   email String @unique()
   passwordHash String
 
+  messages Message[]
+
   @@map("users")
+}
+
+model Message {
+  id Int @id @default(autoincrement())
+  createdAt DateTime @default(now()) @map("created_at")
+  content String
+  userId String @map("user_id")
+  parentId Int? @map("parent_id")
+  
+  user User @relation(fields: [userId], references: [id])
+  children Message[] @relation("MessageChildren")
+  parent Message? @relation(fields: [parentId], references: [id], name: "MessageChildren")
+
+  @@map("messages")
 }
