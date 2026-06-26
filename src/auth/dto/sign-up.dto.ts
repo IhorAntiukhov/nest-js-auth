@@ -1,23 +1,15 @@
-import {
-  IsEmail,
-  IsNotEmpty,
-  IsString,
-  Length,
-  MaxLength,
-} from 'class-validator';
+import { IsNotEmpty, IsString, MaxLength } from 'class-validator';
+import { SignInDto } from './sign-in.dto';
+import { ApiProperty } from '@nestjs/swagger';
 
-export class SignUpDto {
+export class SignUpDto extends SignInDto {
+  @ApiProperty({
+    name: 'User name',
+    maxLength: 50,
+    type: 'string',
+  })
   @IsString()
   @IsNotEmpty()
   @MaxLength(50)
   name!: string;
-
-  @IsString()
-  @IsEmail()
-  @MaxLength(50)
-  email!: string;
-
-  @IsString()
-  @Length(6, 20)
-  password!: string;
 }
