@@ -1,4 +1,5 @@
 import { createContext } from "react";
+import { Socket } from "socket.io-client";
 
 export interface MessageData {
   id: number;
@@ -8,6 +9,7 @@ export interface MessageData {
 interface MessagesContextType {
   replyToMessage: MessageData | null;
   setReplyToMessage: (id: MessageData | null) => void;
+  socket: Socket;
 }
 
 const MessagesContext = createContext<MessagesContextType | undefined>(

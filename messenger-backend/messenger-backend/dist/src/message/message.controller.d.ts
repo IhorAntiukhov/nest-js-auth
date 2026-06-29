@@ -6,15 +6,15 @@ export declare class MessageController {
     constructor(messageService: MessageService);
     findAll(): Promise<{
         isOwnMessage: boolean;
+        user: {
+            name: string;
+            id: string;
+        };
         id: number;
         createdAt: Date;
         content: string;
-        userId: string;
         parentId: number | null;
-        user: {
-            id: string;
-            name: string;
-        };
+        userId: string;
         parent: {
             content: string;
         } | null;
@@ -23,7 +23,7 @@ export declare class MessageController {
         id: number;
         createdAt: Date;
         content: string;
-        userId: string;
         parentId: number | null;
+        userId: string;
     }>;
 }

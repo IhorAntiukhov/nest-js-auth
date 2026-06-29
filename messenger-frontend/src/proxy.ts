@@ -7,7 +7,7 @@ export async function proxy(req: NextRequest) {
     return NextResponse.redirect(new URL("/sign-in", req.url));
   }
 
-  const response = await fetch(`${process.env.API_URL}/auth/me`, {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/me`, {
     headers: {
       Cookie: `access_token=${accessToken}`,
     },

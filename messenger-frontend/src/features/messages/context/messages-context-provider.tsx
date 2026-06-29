@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import MessagesContext, { MessageData } from "./messages-context";
+import { io } from "socket.io-client";
 
 export default function MessagesContextProvider({
   children,
@@ -12,8 +13,19 @@ export default function MessagesContextProvider({
     null,
   );
 
+  const socket = useMemo(
+    () =>
+      io(process.env.NEXT_PUBLIC_API_URL!, {
+        withCredentials: true,
+        transports: ["websocket"],
+      }),
+    [],
+  );
+
   return (
-    <MessagesContext.Provider value={{ replyToMessage, setReplyToMessage }}>
+    <MessagesContext.Provider
+      value={{ replyToMessage, setReplyToMessage, socket }}
+    >
       {children}
     </MessagesContext.Provider>
   );

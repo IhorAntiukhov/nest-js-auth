@@ -2,7 +2,6 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import FormInput from "@/components/ui/form-input";
-import { useRouter } from "next/navigation";
 import {
   NewMessageFormValues,
   newMessageSchema,
@@ -10,15 +9,13 @@ import {
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
-import createMessage from "../actions/create-message";
 import { zodResolver } from "@hookform/resolvers/zod";
 import MessagesContext from "../context/messages-context";
 import { useContext } from "react";
 
 export default function NewMessageForm() {
-  const router = useRouter();
-
-  const { replyToMessage, setReplyToMessage } = useContext(MessagesContext)!;
+  const { replyToMessage, setReplyToMessage, socket } =
+    useContext(MessagesContext)!;
 
   const {
     control,
@@ -33,12 +30,9 @@ export default function NewMessageForm() {
 
   const handleNewMessage = handleSubmit(async ({ content }) => {
     try {
-      await createMessage({ content, parentId: replyToMessage?.id });
+      socket.emit("createMessage", { content, parentId: replyToMessage?.id });
 
       toast.success("Message posted successfully!");
-
-      router.refresh();
-      router.replace("/");
     } catch (error) {
       toast.error((error as Error).message);
     }
