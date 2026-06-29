@@ -1,16 +1,16 @@
-import type { Metadata } from 'next';
-import { Geist_Mono } from 'next/font/google';
-import './globals.css';
-import { Toaster } from 'sonner';
+import type { Metadata } from "next";
+import { Geist_Mono } from "next/font/google";
+import "./globals.css";
+import { Toaster } from "sonner";
 
 const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
-  title: 'Simple messenger app',
-  description: 'A simple messenger app built with Next.js, NestJS, and Prisma.',
+  title: "Simple messenger app",
+  description: "A simple messenger app built with Next.js, NestJS, and Prisma.",
 };
 
 export default function RootLayout({
@@ -23,7 +23,7 @@ export default function RootLayout({
       lang="en"
       className={`${geistMono.variable} h-full antialiased font-mono`}
     >
-      <body className="flex flex-col min-h-full">
+      <body className="flex flex-col p-10 h-full">
         {children}
         <Toaster position="bottom-center" richColors />
       </body>

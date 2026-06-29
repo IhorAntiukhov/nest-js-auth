@@ -12,9 +12,13 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import createMessage from "../actions/create-message";
 import { zodResolver } from "@hookform/resolvers/zod";
+import MessagesContext from "../context/messages-context";
+import { useContext } from "react";
 
 export default function NewMessageForm() {
   const router = useRouter();
+
+  const { replyToMessage, setReplyToMessage } = useContext(MessagesContext)!;
 
   const {
     control,
@@ -29,9 +33,9 @@ export default function NewMessageForm() {
 
   const handleNewMessage = handleSubmit(async ({ content }) => {
     try {
-      await createMessage({ content });
+      await createMessage({ content, parentId: replyToMessage?.id });
 
-      toast.success("Message created successfully!");
+      toast.success("Message posted successfully!");
 
       router.refresh();
       router.replace("/");
@@ -46,7 +50,23 @@ export default function NewMessageForm() {
         <CardTitle>New Message</CardTitle>
       </CardHeader>
 
-      <CardContent>
+      <CardContent className="flex flex-col gap-5">
+        {replyToMessage && (
+          <div className="flex justify-between items-center gap-5 w-full">
+            <p className="text-muted-foreground text-sm">
+              Replying to: {replyToMessage.content}
+            </p>
+
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setReplyToMessage(null)}
+            >
+              X
+            </Button>
+          </div>
+        )}
+
         <form className="flex flex-col gap-5" onSubmit={handleNewMessage}>
           <FormInput
             name="content"

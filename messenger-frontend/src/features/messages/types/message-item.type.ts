@@ -1,5 +1,5 @@
 interface FullMessageItem {
-  id: string;
+  id: number;
   content: string;
   createdAt: string;
   isOwnMessage: boolean;

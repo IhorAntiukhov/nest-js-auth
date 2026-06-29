@@ -1,11 +1,12 @@
 import getMessages from "../actions/get-messages";
 import MessageItem from "./message-item";
+import MessagesListPoller from "./messages-list-poller";
 
 export default async function MessagesList() {
   const { data: messages, error } = await getMessages();
 
   return (
-    <div className="flex flex-col gap-2 p-5">
+    <div className="flex flex-col flex-1 items-stretch gap-2 p-5 w-full max-w-96 overflow-scroll">
       {error && <p className="text-red-500">{error}</p>}
       {messages &&
         messages.length > 0 &&
@@ -23,6 +24,8 @@ export default async function MessagesList() {
       {messages && messages.length === 0 && (
         <p className="text-gray-500">No messages yet</p>
       )}
+
+      <MessagesListPoller />
     </div>
   );
 }
