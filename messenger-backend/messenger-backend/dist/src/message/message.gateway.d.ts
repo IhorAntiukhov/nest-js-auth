@@ -15,11 +15,11 @@ export declare class MessageGateway implements OnGatewayConnection, OnGatewayDis
     handleCreateMessage(socket: Socket, data: CreateMessageDto): Promise<{
         event: string;
         data: {
+            id: number;
             createdAt: Date;
             content: string;
-            id: number;
-            userId: string;
             parentId: number | null;
+            userId: string;
         };
     } | undefined>;
     private extractAccessToken;

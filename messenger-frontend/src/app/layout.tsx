@@ -23,7 +23,7 @@ export default function RootLayout({
       lang="en"
       className={`${geistMono.variable} h-full antialiased font-mono`}
     >
-      <body className="flex flex-col p-10 h-full">
+      <body className="min-h-screen">
         {children}
         <Toaster position="bottom-center" richColors />
       </body>

@@ -14,11 +14,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthService = void 0;
 const common_1 = require("@nestjs/common");
-const prisma_service_1 = require("../prisma/prisma.service");
-const argon2_1 = require("argon2");
-const jwt_1 = require("@nestjs/jwt");
 const config_1 = require("@nestjs/config");
+const jwt_1 = require("@nestjs/jwt");
+const argon2_1 = require("argon2");
 const is_dev_env_util_1 = __importDefault(require("../common/utils/is-dev-env.util"));
+const prisma_service_1 = require("../prisma/prisma.service");
 let AuthService = class AuthService {
     prismaService;
     jwtService;

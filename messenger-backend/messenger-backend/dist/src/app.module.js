@@ -13,12 +13,13 @@ const config_1 = require("@nestjs/config");
 const prisma_module_1 = require("./prisma/prisma.module");
 const prisma_service_1 = require("./prisma/prisma.service");
 const message_module_1 = require("./message/message.module");
+const profile_module_1 = require("./profile/profile.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
-        imports: [auth_module_1.AuthModule, config_1.ConfigModule.forRoot({ isGlobal: true }), prisma_module_1.PrismaModule, message_module_1.MessageModule],
+        imports: [auth_module_1.AuthModule, config_1.ConfigModule.forRoot({ isGlobal: true }), prisma_module_1.PrismaModule, message_module_1.MessageModule, profile_module_1.ProfileModule],
         controllers: [],
         providers: [prisma_service_1.PrismaService],
     })

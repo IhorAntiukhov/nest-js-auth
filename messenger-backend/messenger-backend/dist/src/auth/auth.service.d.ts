@@ -1,9 +1,9 @@
-import { PrismaService } from "../prisma/prisma.service";
-import { SignUpDto } from './dto/sign-up.dto';
-import { SignInDto } from './dto/sign-in.dto';
-import { Response } from 'express';
-import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
+import { JwtService } from '@nestjs/jwt';
+import { Response } from 'express';
+import { PrismaService } from "../prisma/prisma.service";
+import { SignInDto } from './dto/sign-in.dto';
+import { SignUpDto } from './dto/sign-up.dto';
 export declare class AuthService {
     private readonly prismaService;
     private readonly jwtService;
@@ -18,7 +18,13 @@ export declare class AuthService {
         createdAt: Date;
         passwordHash: string;
     } | null>;
-    private findUserByEmail;
+    findUserByEmail(email: string): Promise<{
+        name: string;
+        email: string;
+        id: string;
+        createdAt: Date;
+        passwordHash: string;
+    } | null>;
     private signAccessToken;
     private getCookieOptions;
 }

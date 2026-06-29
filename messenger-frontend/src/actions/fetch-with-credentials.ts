@@ -19,7 +19,7 @@ export default async function fetchWithCredentials<T>({
   const cookieStore = await cookies();
   const accessToken = cookieStore.get("access_token")?.value;
 
-  return await fetch(`${process.env.API_URL}${url}`, {
+  return await fetch(`${process.env.NEXT_PUBLIC_API_URL}${url}`, {
     method,
     credentials: "include",
     headers: {
